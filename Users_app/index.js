@@ -22,7 +22,14 @@ function connectDB() {
         })
     })
 }
+function tokenValidator(req, res, next) {
+    if(!req.headers || !req.headers.token) {
+        throw Error('invalid token');
+    }
+    next();
+}
 
+app.use(tokenValidator);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/', routes(dbconnection));
@@ -39,6 +46,10 @@ app.listen(port, (req, res) => {
         })
         .catch(err => {
             console.log("error while initializing: ", err);
+            if(!dbconnection && !dbconnection.connection) {
+                console.log('database connection ended');
+                dbconnection.endConnection();
+            }
         });
 });
 
