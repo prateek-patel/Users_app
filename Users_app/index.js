@@ -9,21 +9,8 @@ let routes = require('./handler');
 let dbconnection = require('./models');
 const port = 8080;
 
-
-function connectDB() {
-    return new Promise((resolve, reject) => {
-        dbconnection.connection.connect(err => {
-            if (err) {
-                console.log('error connecting to database: ', err.message);
-                reject('error connecting to database')
-            }
-            resolve('Connected to database');
-            console.log('Connected to database');
-        })
-    })
-}
 function tokenValidator(req, res, next) {
-    if(!req.headers || !req.headers.token) {
+    if (!req.headers || !req.headers.token) {
         throw Error('invalid token');
     }
     next();
@@ -35,26 +22,15 @@ app.use(bodyParser.json());
 app.use('/', routes(dbconnection));
 
 app.listen(port, (req, res) => {
-    return connectDB()
+    return Promise.resolve(true)
         .then(_ => {
             console.log(figlet.textSync('Users App!', {
                 horizontalLayout: 'default',
                 verticalLayout: 'default'
             }));
             console.log(`server started at port: ${port}`);
-
         })
         .catch(err => {
             console.log("error while initializing: ", err);
-            if(!dbconnection && !dbconnection.connection) {
-                console.log('database connection ended');
-                dbconnection.endConnection();
-            }
         });
 });
-
-/* function listening() {
-    return new Promise((resolve, reject) => {
-
-    })
-} */
