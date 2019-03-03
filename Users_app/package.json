@@ -10,6 +10,8 @@
   "author": "prateek patel",
   "license": "ISC",
   "dependencies": {
+    "ajv": "^6.10.0",
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "figlet": "^1.2.1",
     "mysql": "^2.16.0",

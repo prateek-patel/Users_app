@@ -1,10 +1,12 @@
 'use strict';
 
-module.exports = () => {
+module.exports = (dbconnection) => {
     return (req, res, next) => {
-        return Promise.resolve(true)
-            .then(_ => {
-                res.send('get requests!!!')
+        return dbconnection.findAllUsers()
+            .then(users => {
+                res.send({
+                    "Users": users
+                })
             })
             .catch(next)
     }

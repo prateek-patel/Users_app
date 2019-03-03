@@ -1,0 +1,30 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": [
+        "CreateUserParams"
+    ],
+    "properties": {
+        "CreateUserParams": {
+            "type": "object",
+            "required": [
+                "name",
+                "address"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "examples": [
+                        "Raj"
+                    ]
+                },
+                "address": {
+                    "type": "string",
+                    "examples": [
+                        "pune"
+                    ]
+                }
+            }
+        }
+    }
+}

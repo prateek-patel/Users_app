@@ -2,7 +2,7 @@
 
 let routes = require('express').Router({ mergeParams: true });
 
-module.exports = () => {
-    routes.use('/user', require('./user')());
+module.exports = (dbconnection) => {
+    routes.use('/user', require('./user')(dbconnection));
     return routes;
 }
